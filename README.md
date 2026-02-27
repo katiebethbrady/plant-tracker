@@ -2,11 +2,12 @@
 A command-line application built with Python to track and manage your plants.
 
 ## Purpose
-This project was built...
+This project was built to practice and demonstrate fundamental Python concepts including object oriented programming, input validation, error handling, and clean code structure.
 
 ## Project Structure
 - `main.py` — application entry point and menu logic
 - `plant.py` — Plant class definition
+- `database.py` — database connection and queries
 
 ## Technologies
 - Python 3
@@ -15,15 +16,36 @@ This project was built...
 - python-dotenv
 
 ## Setup
-1. Clone repository
-...
+1. Clone the repository
+2. Install dependencies:
+```
+pip install psycopg2-binary python-dotenv
+```
+3. Create a `.env` file in the root directory with the following:
+```
+DB_HOST=localhost
+DB_NAME=plant_tracker
+DB_USER=postgres
+DB_PASSWORD=yourpassword
+```
+4. Set up PostgreSQL and create the `plants` table:
+```sql
+CREATE TABLE plants (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    species TEXT NOT NULL,
+    location TEXT NOT NULL,
+    last_watered TEXT NOT NULL
+);
+```
+5. Run the app:
+```
+python main.py
+```
 
 ## Features
-- Add a plant...
-```
-
-The key things missing are the `#` for headers and `-` for list items. Fix that, then run:
-```
-git add README.md
-git commit -m "Fix README formatting"
-git push
+- Add a plant with name, species, location, and last watered date
+- View all plants
+- Input validation with user friendly error messages
+- Object oriented design using a Plant class
+- Data persists to a PostgreSQL database
