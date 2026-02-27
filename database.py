@@ -1,0 +1,28 @@
+from dotenv import load_dotenv
+import os
+import psycopg2
+
+load_dotenv()
+
+host = os.getenv("DB_HOST")
+database = os.getenv("DB_NAME")
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+
+def connect():
+    connection = psycopg2.connect(
+    host = host,
+    database = database,
+    user = user,
+    password = password
+    )
+    return connection
+
+def db_add_plant(connection, plant):
+    cursor = connection.cursor()
+    cursor.execute(
+    "INSERT INTO plants (name, species, location, last_watered) VALUES (%s, %s, %s, %s)",
+    (plant.name, plant.species, plant.location, plant.last_watered)
+    )
+    connection.commit()
+    cursor.close()
