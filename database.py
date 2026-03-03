@@ -28,10 +28,18 @@ def db_add_plant(connection, plant):
     cursor.close()
 
 def db_get_all_plants(connection):
-        cursor = connection.cursor()
-        cursor.execute(
-             "SELECT * FROM plants"
-        )
-        results = cursor.fetchall()
-        cursor.close()
-        return results
+    cursor = connection.cursor()
+    cursor.execute(
+            "SELECT * FROM plants"
+    )
+    results = cursor.fetchall()
+    cursor.close()
+    return results
+
+def db_delete_plant_by_ID(connection, id):
+    cursor = connection.cursor()
+    cursor. execute(
+    "DELETE FROM plants WHERE id = %s", (id,)
+    )
+    connection.commit()
+    cursor.close()

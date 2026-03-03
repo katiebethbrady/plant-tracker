@@ -36,7 +36,8 @@ def menu():
     print("Menu:")
     print("\t1. Add a plant")
     print("\t2. View all plants")
-    print("\t3. Quit")
+    print("\t3. Delete a plant")
+    print("\t4. Quit")
 
 def main():
     connection = connect()
@@ -51,11 +52,16 @@ def main():
         elif choice == "2":  
             rows = db_get_all_plants(connection)
             for row in rows:
+                print(f"ID: {row[0]}")
                 print(f"Name: {row[1]}")
                 print(f"Species: {row[2]}")
                 print(f"Location: {row[3]}")
-                print(f"Last Watered: {row[4]}\n")        
+                print(f"Last Watered: {row[4]}\n")  
         elif choice == "3":
+            id = input("Please enter an ID to delete plant: ")
+            db_delete_plant_by_ID(connection, id)
+            print("Successfully deleted plant from database!")
+        elif choice == "4":
             break  
         else:
             print("Invalid option. Try again by entering an option 1-3.") 
