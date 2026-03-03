@@ -1,5 +1,6 @@
-from plant import Plant                               # import Plant class
-from database import connect, db_add_plant            # importing fnc for DB connection, fnc for add plant to table
+from plant import Plant                 # import Plant class
+from database import *                  # import all db functions
+
 
 def add_plant():                        # new plant information
 
@@ -32,6 +33,7 @@ def add_plant():                        # new plant information
     return new_plant
 
 def menu():
+    print("Menu:")
     print("\t1. Add a plant")
     print("\t2. View all plants")
     print("\t3. Quit")
@@ -46,13 +48,13 @@ def main():
             new_plant = add_plant()
             plant_list.append(new_plant)
             db_add_plant(connection, new_plant)
-        elif choice == "2":
-            if not plant_list:
-                print("No plants added yet.")
-            else:   
-                for item in plant_list: 
-                    item.display()
-
+        elif choice == "2":  
+            rows = db_get_all_plants(connection)
+            for row in rows:
+                print(f"Name: {row[1]}")
+                print(f"Species: {row[2]}")
+                print(f"Location: {row[3]}")
+                print(f"Last Watered: {row[4]}\n")        
         elif choice == "3":
             break  
         else:

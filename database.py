@@ -26,3 +26,12 @@ def db_add_plant(connection, plant):
     )
     connection.commit()
     cursor.close()
+
+def db_get_all_plants(connection):
+        cursor = connection.cursor()
+        cursor.execute(
+             "SELECT * FROM plants"
+        )
+        results = cursor.fetchall()
+        cursor.close()
+        return results
