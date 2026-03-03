@@ -43,3 +43,12 @@ def db_delete_plant_by_ID(connection, id):
     )
     connection.commit()
     cursor.close()
+
+def db_search_plant(connection, search_term):
+    cursor = connection.cursor()
+    cursor.execute(
+        "SELECT * FROM plants where name = %s OR species = %s", (search_term, search_term)
+    )
+    results = cursor.fetchall()
+    cursor.close()
+    return results
