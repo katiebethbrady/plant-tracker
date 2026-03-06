@@ -54,3 +54,11 @@ def db_search_plant(connection, search_term):
     results = cursor.fetchall()
     cursor.close()
     return results
+
+def db_update_last_watered(connection, id, last_watered):
+    cursor = connection.cursor()
+    cursor.execute(
+        "UPDATE plants SET last_watered = %s WHERE id = %s", (last_watered, id)
+    )
+    connection.commit()
+    cursor.close()
