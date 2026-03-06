@@ -44,10 +44,12 @@ def db_delete_plant_by_ID(connection, id):
     connection.commit()
     cursor.close()
 
+
 def db_search_plant(connection, search_term):
+    search = f"%{search_term}%"
     cursor = connection.cursor()
     cursor.execute(
-        "SELECT * FROM plants where name = %s OR species = %s", (search_term, search_term)
+        "SELECT * FROM plants WHERE name ILIKE %s OR species ILIKE %s", (search, search)
     )
     results = cursor.fetchall()
     cursor.close()
