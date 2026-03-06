@@ -37,6 +37,8 @@ def delete_plant(id: int):
 def search_plant(term: str):
     connection = connect()
     results = db_search_plant(connection, term)
+    if not results:
+        return {"message": "No plants found! Try again!"}
     return results
 
 @app.put("/plants/{id}")
